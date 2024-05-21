@@ -27,6 +27,9 @@ async fn main() {
 		}
 	}
 
+ println!("{}\n...\n{}", output.split('\n').collect::<Vec<&str>>()[0], output.split('\n').collect::<Vec<&str>>()[output.split('\n').collect::<Vec<&str>>().len() - 2]);
+        
+
 	if !std::path::PathBuf::from("./out").exists() {
 		println!("Creating \"./out\" directory...");
 		tokio::fs::create_dir("./out").await
@@ -46,18 +49,18 @@ async fn main() {
 
 #[allow(clippy::unused_async)]
 async fn collatz_conjecture(starting_number: usize) -> Option<usize> {
-	let mut numbers: Vec<usize> = Vec::new();
+	let mut numbers: Vec<u128> = Vec::new();
 	let mut current = starting_number;
 
 	for _ in 0..STEP_LIMIT {
 		if current % 2 == 0 {
-			numbers.push(current);
+			numbers.push(current as u128);
 			current /= 2;
 		} else if current == 1 {
-			numbers.push(current);
+			numbers.push(current as u128);
 			break
 		} else {
-			numbers.push(current);
+			numbers.push(current as u128);
 			current = current * 3 + 1;
 		}
 	}
