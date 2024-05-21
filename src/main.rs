@@ -1,3 +1,5 @@
+#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+
 const STEP_LIMIT: usize = 100_000;
 const STARTING_POINT: usize = 1;
 const ENDING_POINT: usize = u16::MAX as usize;
@@ -27,9 +29,17 @@ async fn main() {
 		}
 	}
 
-        println!("{}\n...\n{}", output.split('\n').collect::<Vec<&str>>()[0], output.split('\n').collect::<Vec<&str>>()[output.split('\n').collect::<Vec<&str>>().len() - 2]);
-        
+	{
+		let mut preview_output: Vec<&str> = output.split('\n').collect::<Vec<&str>>();
+		preview_output.pop();
 
+		println!(
+			"{}\n...\n{}",
+			preview_output[0],
+			preview_output[preview_output.len() - 1]
+		);
+	}
+	
 	if !std::path::PathBuf::from("./out").exists() {
 		println!("Creating \"./out\" directory...");
 		tokio::fs::create_dir("./out").await
