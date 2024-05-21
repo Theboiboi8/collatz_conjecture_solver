@@ -27,7 +27,7 @@ async fn main() {
 		}
 	}
 
- println!("{}\n...\n{}", output.split('\n').collect::<Vec<&str>>()[0], output.split('\n').collect::<Vec<&str>>()[output.split('\n').collect::<Vec<&str>>().len() - 2]);
+    println!("{}\n...\n{}", output.split('\n').collect::<Vec<&str>>()[0], output.split('\n').collect::<Vec<&str>>()[output.split('\n').collect::<Vec<&str>>().len() - 2]);
         
 
 	if !std::path::PathBuf::from("./out").exists() {
